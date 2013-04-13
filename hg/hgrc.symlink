@@ -1,0 +1,27 @@
+[ui]
+username = Rado Kirov <rkirov@gmail.com>
+
+[extensions]
+rebase =
+mq =
+fetch =
+graphlog =
+pager =
+color =
+record =
+
+[merge-patterns]
+** = filemerge
+
+[merge-tools]
+filemerge.executable = vim
+filemerge.args = -d $local $other
+filemerge.checkchanged = true
+filemerge.gui = false
+
+[pager]
+pager = LESS='R' less
+attend = annotate, cat, diff, log, glog, qdiff
+
+[dif]
+git = True

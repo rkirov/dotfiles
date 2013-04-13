@@ -1,0 +1,20 @@
+# use C-a as prefix
+unbind C-b
+set-option -g prefix C-a
+
+# pass a as C-a
+bind a send-prefix
+
+# doesn't seem to be needed
+# set -g default-terminal "screen-256color"
+
+# don't wait for escape sequence
+set -s escape-time 0
+
+# status bar
+set -g status-bg blue
+set -g status-fg white
+set -g status-left "[#S:#W:#P-#T]"
+set -g status-left "[#S:#W:#P-#T]"
+set -g status-left-length 25
+set -g status-right ""

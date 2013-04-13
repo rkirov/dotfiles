@@ -1,0 +1,8 @@
+[user]
+	email = rkirov@gmail.com
+	name = Rado Kirov
+[core]
+	excludesfile = ~/.gitignore_global
+	whitespace = trailing-space,indent-with-non-tab
+[color]
+	ui = true
