@@ -21,6 +21,7 @@ set wildmenu " show tab completion for commands
 set softtabstop=2
 set tabstop=2
 set pastetoggle=<F4>
+set directory=~/.vim/swap,/tmp/.vim/swap,. " don't polute current dir with swaps
 
 colorscheme xoria256
 
