@@ -12,13 +12,18 @@ shopt -s histappend
 shopt -s checkwinsize
 
 ## Prompt
-custom_color1='\[\e[1;38;5;74m\]'
-custom_color2='\[\e[1;38;5;74m\]'
-PS1="${custom_color1}\l:$((SHLVL - 1)):\j \[\e[m\]${custom_color2}\u@\h:\w\[\e[m\] $ \[\e[0;37m\]"
+# color1='\[\e[1;38;5;103m\]' bold
+color1='\[\e[38;5;103m\]'
+color2='\[\e[38;5;103m\]'
+color3='\[\e[38;5;222m\]'
+color4='\[\e[38;5;222m\]'
+colorsp='\[\e[38;5;240m\]'
+end='\[\033[m\]'
+PS1="$color1\u$end ${colorsp}on$end $color2\h$end ${colorsp}in$end $color3\w$end$color4\$(__git_ps1)$end ${colorsp}>$end "
 export PROMPT_DIRTRIM=2
 
 # enable color support of ls and also add handy aliases
-alias ls='ls --color=auto'
+# alias ls='ls -G', looks aweful on mac
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -42,6 +47,17 @@ if [ -f /etc/bash_completion ]; then . /etc/bash_completion; fi
 export TERM=xterm-256color
 export EDITOR=vim
 
+# mac only
+export JAVA_HOME=$(/usr/libexec/java_home)
+
 # modifications to PATH, depend on local installation thus not exported.
 if [[ -f ~/.bash_path ]]; then . ~/.bash_path; fi;
 . ~/.bash_aliases
+
+# git for mac (brew)
+if [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+  . /usr/local/etc/bash_completion.d/git-prompt.sh
+fi
+if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  . /usr/local/etc/bash_completion.d/git-completion.bash
+fi

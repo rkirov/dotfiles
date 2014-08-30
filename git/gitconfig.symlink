@@ -6,3 +6,7 @@
 	whitespace = trailing-space,indent-with-non-tab
 [color]
 	ui = true
+[push]
+	default = simple
+[alias]
+	show-graph = log --graph --abbrev-commit --pretty=oneline
