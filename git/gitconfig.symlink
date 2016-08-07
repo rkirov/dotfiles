@@ -2,7 +2,7 @@
 	email = rkirov@gmail.com
 	name = Rado Kirov
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/rado/.gitignore_global
 	whitespace = trailing-space,indent-with-non-tab
 [color]
 	ui = true
@@ -10,3 +10,13 @@
 	default = simple
 [alias]
 	show-graph = log --graph --abbrev-commit --pretty=oneline
+	st = status
+	co = checkout
+	re = rebase
+	fa = fetch --all
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

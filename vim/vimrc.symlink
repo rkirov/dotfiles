@@ -2,54 +2,82 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set colorcolumn=81
-set expandtab
+set backspace=indent,eol,start  " allow backspacing over everything in insert mode
+" set colorcolumn=81
+set expandtab  " spaces, not tabs
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2
 set history=50  " keep 50 lines of command line history
 set hlsearch
-set incsearch	" do incremental searching
+set incsearch  " do incremental searching
 set mouse=a
 set nobackup  " do not keep a backup file, use versions instead
-set number
-set ruler	" show the cursor position all the time
+set number  " show line numbers
+set ruler  " show the cursor position all the time
 set sm  " show matching paren.
 set ai  " autoindent
 set si  " smart-indenting
-set shiftwidth=2
-set showcmd	" display incomplete commands in bottom right
-set wildmenu " show tab completion for commands
-set softtabstop=2
-set tabstop=2
+set showcmd  " display incomplete commands in bottom right
+set wildmenu  " show tab completion for commands
 set pastetoggle=<F4>
-set directory=~/.vim/swap,/tmp/.vim/swap,. " don't polute current dir with swaps
+set directory=~/.vim/swap,/tmp/.vim/swap,.  " don't polute current dir with swaps
+set notimeout  " dont wait after key combination
 
-colorscheme xoria256
+" colors
+set background=dark  " changes some colorschemes
+colorscheme base16-bright
+highlight Normal ctermbg=NONE
+highlight nonText ctermbg=NONE
 
-call pathogen#infect()
+" vundle needs this when I use fish.
+set shell=/bin/bash
+
+" vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+" Plugin 'Valloric/YouCompleteMe'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'rust-lang/rust.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Quramy/tsuquyomi'
+call vundle#end()            " required
+
+" language syntax highlighting
+" has to be after vundle otherwise TS syntax doesn't work.
 filetype plugin indent on
 syntax on
 
-
 " Toggle line numbers and fold column for easy copying:
 nnoremap <F2> :set nonumber!<cr>:set foldcolumn=0<cr>
-nnoremap <F3> :NERDTreeToggle<cr>
 
 " highlight whitespace at the end of line
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-match ExtraWhitespace /\s\+$/
+" highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+" match ExtraWhitespace /\s\+$/
 
 " leader is default \
 " edit my vimrc
-nnoremap <leader>er :tabe $MYVIMRC<cr>
+nnoremap <leader>re :tabe $MYVIMRC<cr>
 " source my vimrc
-nnoremap <leader>sr :source $MYVIMRC<cr>
+nnoremap <leader>rs :source $MYVIMRC<cr>
+
+" edit from current file's dir
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<cr>
+map <leader>ew :e %%
 
 " switch under_score_case to camelCase
 nnoremap <leader>c viw:s/_\(\w\)/\U\1/g<cr>
 " switch camelCase to under_score_case
 nnoremap <leader>u viw:s/\([A-Z]\)/_\L\1/g<cr>
 " wrap selection in double quotes
-vnoremap <leader>q <esc>`<i"<esc>`>a"<esc><cr>
+vnoremap <leader>q <esc>`<i"<esc>`>a"<esc>
+
+" quick buffer movement
+nnoremap <leader>p :bnext<cr>
+nnoremap <leader>b :bprevious<cr>
 
 " overriding ,
 let localleader = ","
@@ -65,9 +93,10 @@ augroup filetype_autocmd
   autocmd!
   " Python
   autocmd FileType python :nnoremap <buffer> <localleader>e :w<cr>:!python %<cr>
+  " JS
+  autocmd FileType javascript :nnoremap <buffer> <localleader>e :w<cr>:!node %<cr>
 augroup END
 
-" status line
-"set laststatus=1
-"set statusline=%f\ %y\ %=%l/%L
-"set rulerformat
+" ocaml
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"

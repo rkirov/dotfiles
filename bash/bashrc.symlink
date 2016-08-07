@@ -19,7 +19,7 @@ color3='\[\e[38;5;222m\]'
 color4='\[\e[38;5;222m\]'
 colorsp='\[\e[38;5;240m\]'
 end='\[\033[m\]'
-PS1="$color1\u$end ${colorsp}on$end $color2\h$end ${colorsp}in$end $color3\w$end$color4\$(__git_ps1)$end ${colorsp}>$end "
+PS1="$color3\w$end$color4\$(__git_ps1)$end ${colorsp}>$end "
 export PROMPT_DIRTRIM=2
 
 # enable color support of ls and also add handy aliases
@@ -61,3 +61,19 @@ fi
 if [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
   . /usr/local/etc/bash_completion.d/git-completion.bash
 fi
+
+# node version manager
+export NVM_DIR="/Users/rado/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# go
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
+
+# ocaml
+eval `opam config env --shell=bash`
+
+# nix os
+source /Users/rado/.nix-profile/etc/profile.d/nix.sh
